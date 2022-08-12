@@ -23,20 +23,13 @@ static int16_t Partition(int16_t* arr, int16_t arrSize)
     int16_t pivot = arr[arrSize-1];
     int16_t i = 0, j = 0;
 
-    while ((j <= arrSize-1))
+    for (j = 0; j <= arrSize-1; j++)
     {
-        while ((arr[j] > pivot))
-        {
-            j++;
-        }
-
-        if (i < j)
+        if (arr[j] <= pivot)
         {
             Swap(&arr[i], &arr[j]);
+            i++;
         }
-        
-        j++;
-        i++;
     }
 
     return (i-1);
