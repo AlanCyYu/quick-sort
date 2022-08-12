@@ -4,28 +4,35 @@
 #include <stdlib.h>
 #include "quick_sort.h"
 
-#define ARRAY_SIZE 100
-#define TEST_TIMES 5
+#define ARRAY_SIZE 13
+#define TEST_TIMES 10
 
 void GenRandomArray(int16_t* arr, uint16_t arrSize);
 void CheckFuntion(int16_t arr[], uint16_t arrSize);
 
 int main()
 {
-     int16_t arr[ARRAY_SIZE];
-     uint16_t arrSize = sizeof(arr)/sizeof(arr[0]);
+    time_t t;
+    srand(time(&t));// Initialization, should only be called once.
+    int16_t arr[ARRAY_SIZE];
+    uint16_t arrSize = sizeof(arr)/sizeof(arr[0]);
 
-     for (int i = 0; i < TEST_TIMES; i++)
-     {
-         GenRandomArray(arr, arrSize);
-         QuickSort(arr, arrSize);
-         CheckFuntion(arr, arrSize);
-     }
+    for (int i = 0; i < TEST_TIMES; i++)
+    {
+        GenRandomArray(arr, arrSize);
+        QuickSort(arr, arrSize);
+        CheckFuntion(arr, arrSize);
+        
+        for (int i = 0; i < arrSize; i++)
+             printf("%d,", arr[i]);   
+        
+        printf("\n\n");
+    }
      
-    for (int i = 0; i < arrSize; i++)
+   /* for (int i = 0; i < arrSize; i++)
          printf("%d,", arr[i]);   
     
-    printf("\n\n");
+    printf("\n\n");*/
 
 }
 
@@ -46,8 +53,6 @@ void CheckFuntion(int16_t arr[], uint16_t arrSize)
 
 void GenRandomArray(int16_t* arr, uint16_t arrSize)
 {
-    time_t t;
-    srand(time(&t));// Initialization, should only be called once.
 
     for (int16_t i = 0; i < arrSize; i++)
     {
