@@ -22,30 +22,29 @@ void QuickSort(int16_t * arr, int16_t arrSize)
 static int16_t Partition(int16_t* arr, int16_t arrSize)
 {
     int16_t pivot = arr[arrSize-1];
-    int16_t i = 0, j = arrSize-2;
+    int16_t i = 0, j = arrSize-1;
 
-    while (i != j)
+    while (i < j)
     {
-        while ((i != j) && (arr[i] < pivot))
+        while ((i < j) && (arr[i] <= pivot))
         {
             i++;
         }
         
-        while ((i != j) && (arr[j] >= pivot))
+        while ((i < j) && (arr[j] >= pivot))
         {
             j--;
         }
-        
-        Swap(&arr[i], &arr[j]);
+
+        if (i < j)
+        {
+            Swap(&arr[i], &arr[j]);
+        }
     }
 
-    if (arr[i] >= arr[arrSize-1])
-    {
-        Swap(&arr[i], &arr[arrSize-1]);
-        return i;
-    }
+    Swap(&arr[i], &arr[arrSize-1]);
+    return i;
 
-    return (arrSize-1);
 }
 
 static void Swap(int16_t* a, int16_t* b)

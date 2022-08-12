@@ -1,27 +1,26 @@
 #include <stdint.h>
 #include <stdio.h>
-
+#include <time.h>
+#include <stdlib.h>
 #include "quick_sort.h"
 
+#define ARRAY_SIZE 100
+#define TEST_TIMES 5
+
+void GenRandomArray(int16_t* arr, uint16_t arrSize);
 void CheckFuntion(int16_t arr[], uint16_t arrSize);
 
 int main()
 {
-     int16_t arr[] = 
-    {880, 1870, 1520, 0, 1540, 2020, 1420, 860, 2400, 1730, 730, 
-     2340, 1750, 180, 330, 1140, 1310, 960, 2100, 200, 1630, 1730, 
-     1710, 850, 890, 60, 1150, 2140, 1120, 2410, 690, 1040, 660, 
-     1790, 1680, 2270, 1920, 2190, 1660, 1850, 1310, 2230, 1050, 
-     1290, 700, 2270,1460, 430, 2100, 1370, 60, 2110, 670, 2120, 
-     1270, 960, 620,1630, 1360, 2300, 1590, 1070, 1010, 2200, 1360, 
-     1090, 460,2150, 750, 650, 1820, 1640, 1750, 1460, 170, 1980, 
-     1260, 1890, 190, 50, 260, 1410, 2140, 1280, 70, 350, 2280, 860,
-     2120, 1260, 250, 1480, 140, 320, 1970, 1040, 1130, 140, 250, 940};
-      
+     int16_t arr[ARRAY_SIZE];
      uint16_t arrSize = sizeof(arr)/sizeof(arr[0]);
 
-     QuickSort(arr, arrSize);
-     CheckFuntion(arr, arrSize);
+     for (int i = 0; i < TEST_TIMES; i++)
+     {
+         GenRandomArray(arr, arrSize);
+         QuickSort(arr, arrSize);
+         CheckFuntion(arr, arrSize);
+     }
      
     for (int i = 0; i < arrSize; i++)
          printf("%d,", arr[i]);   
@@ -44,16 +43,20 @@ void CheckFuntion(int16_t arr[], uint16_t arrSize)
     printf("Algorithm succeed.\n");
     return;
 }
-/*
-int16_t arr[] = 
-{880, 1870, 1520, 0, 1540, 2020, 1420, 860, 2400, 1730, 730, 
- 2340, 1750, 180, 330, 1140, 1310, 960, 2100, 200, 1630, 1730, 
- 1710, 850, 890, 60, 1150, 2140, 1120, 2410, 690, 1040, 660, 
- 1790, 1680, 2270, 1920, 2190, 1660, 1850, 1310, 2230, 1050, 
- 1290, 700, 2270,1460, 430, 2100, 1370, 60, 2110, 670, 2120, 
- 1270, 960, 620,1630, 1360, 2300, 1590, 1070, 1010, 2200, 1360, 
- 1090, 460,2150, 750, 650, 1820, 1640, 1750, 1460, 170, 1980, 
- 1260, 1890, 190, 50, 260, 1410, 2140, 1280, 70, 350, 2280, 860,
- 2120, 1260, 250, 1480, 140, 320, 1970, 1040, 1130, 140, 250, 940};
- */
+
+void GenRandomArray(int16_t* arr, uint16_t arrSize)
+{
+    time_t t;
+    srand(time(&t));// Initialization, should only be called once.
+
+    for (int16_t i = 0; i < arrSize; i++)
+    {
+        *(arr+i) = rand()%32767;
+
+        while ((i != 0) && (*(arr+i) == *(arr)))
+        {
+            *(arr+i) = rand()%32767;
+        }
+    }
+}
 
